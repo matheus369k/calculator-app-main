@@ -8,7 +8,7 @@
 
 html, body
     @include mixins.font()
-    background-color: variables.$bg-body-themer1
+    background-color: variables.$bg-body-themer-1
 
     overflow: hidden
 
@@ -28,16 +28,17 @@ html, body
     display: flex
     flex-direction: column
 
+    row-gap: 20px
+
     .header
         width: 100%
-        height: 50px
+        height: min-content
 
-        color: variables.$text-key-hover-themer1
+        color: variables.$text-key-light-themer-1
         font-size: 16px
 
         display: flex
         flex-direction: row
-        align-items: center
         justify-content: space-between
 
         .calc-name
@@ -49,23 +50,24 @@ html, body
 
         .container-themer
             display: flex
-            align-items: flex-end
 
             column-gap: 10px
 
             .name-themer
                 font-size: 14px
+                align-self: flex-end
 
                 letter-spacing: 1px
 
-                color: variables.$text-key-hover-themer1
+                color: variables.$text-key-light-themer-1
 
             .switch-themer-container
                 width: min-content
+                height: min-content
 
                 position: relative
 
-                background-color: variables.$bg-switch-themer1
+                background-color: variables.$bg-toggle-keypad-themer-1
 
                 display: flex
                 flex-direction: row
@@ -84,7 +86,7 @@ html, body
                     cursor: pointer
 
                     &:is(.active)
-                        background-color: variables.$equal-key-background-and-toggle-themer1
+                        background-color: variables.$equal-key-bg-toggle-themer-1
 
                     &::before
                         content: ''
@@ -116,7 +118,7 @@ html, body
 
         padding: 0 25px
 
-        color: variables.$text-key-hover-themer1
+        color: variables.$text-key-light-themer-1
 
         letter-spacing: 2px
 
@@ -124,9 +126,7 @@ html, body
 
         border-radius: 10px
 
-        margin-bottom: 20px
-
-        background-color: variables.$bg-screen-themer1
+        background-color: variables.$bg-screen-themer-1
 
     .keypad
         width: 100%
@@ -135,7 +135,7 @@ html, body
         flex-direction: row
         flex-wrap: wrap
 
-        background-color: variables.$bg-screen-themer1
+        background-color: variables.$bg-toggle-keypad-themer-1
 
         padding: 30px
 
@@ -158,26 +158,28 @@ html, body
                 @include mixins.font()
                 @include mixins.flex-center()
 
-                border-radius: 5px
-                border-bottom: 5px solid variables.$normal-key2-background-themer1
+                border-radius: 10px
+                border-bottom: 5px solid variables.$normal-key-themer-1-shadow
 
-                color: variables.$text-key-themer1
+                color: variables.$text-key-dark-themer-1
 
                 cursor: pointer
 
-                background-color: variables.$normal-key-background-themer1
+                background-color: variables.$normal-key-bg-themer-1
+
+                transition: .7s easy-in-out
 
                 &:is(.dell-btn)
-                    color: variables.$text-key-hover-themer1
-                    background-color: variables.$reset-key-background-themer1
-                    border-bottom: 5px solid variables.$reset-key-shadow-themer1
+                    color: variables.$text-key-light-themer-1
+                    background-color: variables.$reset-key-bg-themer-1
+                    border-bottom: 5px solid variables.$reset-key-themer-1-shadow
 
                     &:hover
-                        border-bottom: 3px solid variables.$reset-key-shadow-themer1
+                        border-width: 3px 
 
 
                 &:hover
-                    border-bottom: 3px solid variables.$normal-key2-background-themer1
+                    border-width: 3px
 
         .reset-btn,
         .result-btn
@@ -193,20 +195,20 @@ html, body
 
             cursor: pointer
 
-            color: variables.$normal-key-background-themer1
+            color: variables.$text-key-light-themer-1
 
         .reset-btn
-            background-color: variables.$reset-key-background-themer1
-            border-bottom: 5px solid variables.$reset-key-shadow-themer1
+            background-color: variables.$reset-key-bg-themer-1
+            border-bottom: 5px solid variables.$reset-key-themer-1-shadow
 
             &:hover
-                border-bottom: 3px solid variables.$reset-key-shadow-themer1
+                border-width: 3px 
                 
 
         .result-btn
-            background-color: variables.$equal-key-background-and-toggle-themer1
-            border-bottom: 5px solid variables.$equal-shadow-and-toggle-themer1
+            background-color: variables.$equal-key-bg-toggle-themer-1
+            border-bottom: 5px solid variables.$equal-key-toggle-themer-1-shadow
 
             &:hover 
-                border-bottom: 3px solid variables.$equal-shadow-and-toggle-themer1
+                border-width: 3px 
 

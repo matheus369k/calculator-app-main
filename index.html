@@ -12,46 +12,56 @@
 
 <body>
   <main class="container-calc">
+
     <section class="header">
+
       <h3 class="calc-name">Calc</h3>
+
       <div class="container-themer">
+
         <span class="name-themer">theme</span>
-        <nav class="switch-themer-container">
+
+        <nav id="toggleThemer" class="switch-themer-container">
+
           <li class="themer-1 active"></li>
+
           <li class="themer-2"></li>
+
           <li class="themer-3"></li>
+
         </nav>
       </div>
     </section>
 
-    <section class="screen">
-      000009783
+    <section id="screen" class="screen">
+      
     </section>
 
     <section class="keypad">
       <ul class="keypad-btns">
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li class="dell-btn">del</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>+</li>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>-</li>
-        <li>.</li>
-        <li>0</li>
-        <li>/</li>
-        <li>x</li>
+        <li class="btn">7</li>
+        <li class="btn">8</li>
+        <li class="btn">9</li>
+        <li class="dell-btn btn">del</li>
+        <li class="btn">4</li>
+        <li class="btn">5</li>
+        <li class="btn">6</li>
+        <li class="btn">+</li>
+        <li class="btn">1</li>
+        <li class="btn">2</li>
+        <li class="btn">3</li>
+        <li class="btn">-</li>
+        <li class="btn">.</li>
+        <li class="btn">0</li>
+        <li class="btn">/</li>
+        <li class="btn">x</li>
       </ul>
-      <button class="reset-btn" id="reset">reset</button>
-      <button class="result-btn" id="result">=</button>
+      <button class="reset-btn btn" id="reset">reset</button>
+      <button class="result-btn btn" id="result">=</button>
     </section>
   </main>
-  <script src="./src/server/index.js"></script>
+  <script type="module" src="./src/server/index.js"></script>
+  <script src="./src/server/index.ts"></script>
 </body>
 
 </html>

@@ -28,15 +28,15 @@ html, body {
   height: 600px;
   display: flex;
   flex-direction: column;
+  row-gap: 20px;
 }
 .container-calc .header {
   width: 100%;
-  height: 50px;
+  height: min-content;
   color: hsl(0, 0%, 100%);
   font-size: 16px;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
 }
 .container-calc .header .calc-name {
@@ -46,16 +46,17 @@ html, body {
 }
 .container-calc .header .container-themer {
   display: flex;
-  align-items: flex-end;
   column-gap: 10px;
 }
 .container-calc .header .container-themer .name-themer {
   font-size: 14px;
+  align-self: flex-end;
   letter-spacing: 1px;
   color: hsl(0, 0%, 100%);
 }
 .container-calc .header .container-themer .switch-themer-container {
   width: min-content;
+  height: min-content;
   position: relative;
   background-color: hsl(223, 31%, 20%);
   display: flex;
@@ -70,7 +71,7 @@ html, body {
   cursor: pointer;
 }
 .container-calc .header .container-themer .switch-themer-container li:is(.active) {
-  background-color: hsl(6, 63%, 50%);
+  background-color: hsl(5, 93%, 60%);
 }
 .container-calc .header .container-themer .switch-themer-container li::before {
   content: "";
@@ -101,7 +102,6 @@ html, body {
   letter-spacing: 2px;
   font-size: 1.6em;
   border-radius: 10px;
-  margin-bottom: 20px;
   background-color: hsl(224, 36%, 15%);
 }
 .container-calc .keypad {
@@ -109,7 +109,7 @@ html, body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: hsl(224, 36%, 15%);
+  background-color: hsl(223, 31%, 20%);
   padding: 30px;
   border-radius: 10px;
   column-gap: 20px;
@@ -129,22 +129,23 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 10px;
   border-bottom: 5px solid hsl(28, 16%, 65%);
   color: hsl(221, 14%, 31%);
   cursor: pointer;
   background-color: hsl(30, 25%, 89%);
+  transition: 0.7s easy-in-out;
 }
 .container-calc .keypad-btns li:nth-child(n):is(.dell-btn) {
   color: hsl(0, 0%, 100%);
   background-color: hsl(222, 26%, 31%);
-  border-bottom: 5px solid hsl(223, 31%, 20%);
+  border-bottom: 5px solid hsl(223, 51%, 20%);
 }
 .container-calc .keypad-btns li:nth-child(n):is(.dell-btn):hover {
-  border-bottom: 3px solid hsl(223, 31%, 20%);
+  border-width: 3px;
 }
 .container-calc .keypad-btns li:nth-child(n):hover {
-  border-bottom: 3px solid hsl(28, 16%, 65%);
+  border-width: 3px;
 }
 .container-calc .keypad .reset-btn,
 .container-calc .keypad .result-btn {
@@ -159,21 +160,21 @@ html, body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: hsl(30, 25%, 89%);
+  color: hsl(0, 0%, 100%);
 }
 .container-calc .keypad .reset-btn {
   background-color: hsl(222, 26%, 31%);
-  border-bottom: 5px solid hsl(223, 31%, 20%);
+  border-bottom: 5px solid hsl(223, 51%, 20%);
 }
 .container-calc .keypad .reset-btn:hover {
-  border-bottom: 3px solid hsl(223, 31%, 20%);
+  border-width: 3px;
 }
 .container-calc .keypad .result-btn {
-  background-color: hsl(6, 63%, 50%);
+  background-color: hsl(5, 93%, 60%);
   border-bottom: 5px solid hsl(6, 70%, 34%);
 }
 .container-calc .keypad .result-btn:hover {
-  border-bottom: 3px solid hsl(6, 70%, 34%);
+  border-width: 3px;
 }
 
 /*# sourceMappingURL=style.css.map */
