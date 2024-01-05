@@ -1,0 +1,212 @@
+@use '_mixins'
+
+@use '_variables'
+
+@import 'reset'
+
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap')
+
+html, body
+    @include mixins.font()
+    background-color: variables.$bg-body-themer1
+
+    overflow: hidden
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    text-transform: uppercase
+
+    height: 100vh
+    width: 100vw
+
+.container-calc
+    width: 500px
+    height: 600px
+
+    display: flex
+    flex-direction: column
+
+    .header
+        width: 100%
+        height: 50px
+
+        color: variables.$text-key-hover-themer1
+        font-size: 16px
+
+        display: flex
+        flex-direction: row
+        align-items: center
+        justify-content: space-between
+
+        .calc-name
+            align-items: left
+
+            text-transform: capitalize
+
+            font-size: 25px
+
+        .container-themer
+            display: flex
+            align-items: flex-end
+
+            column-gap: 10px
+
+            .name-themer
+                font-size: 14px
+
+                letter-spacing: 1px
+
+                color: variables.$text-key-hover-themer1
+
+            .switch-themer-container
+                width: min-content
+
+                position: relative
+
+                background-color: variables.$bg-switch-themer1
+
+                display: flex
+                flex-direction: row
+
+                padding: 4px
+
+                border-radius: 20px
+
+                column-gap: 5px
+
+                li
+                    padding: 8px
+
+                    border-radius: 20px
+
+                    cursor: pointer
+
+                    &:is(.active)
+                        background-color: variables.$equal-key-background-and-toggle-themer1
+
+                    &::before
+                        content: ''
+
+                        position: absolute
+                        top: -15px
+
+                        font-size: 12px
+
+                .themer-1::before
+                    content: '1'
+                    left: 8px
+
+                .themer-2::before
+                    content: '2'
+                    left: 50%
+                    transform: translateX(-50%)
+
+                .themer-3::before
+                    content: '3'
+                    right: 8px
+
+    .screen
+        width: 500px
+        height: 120px
+
+        display: flex
+        align-items: center
+
+        padding: 0 25px
+
+        color: variables.$text-key-hover-themer1
+
+        letter-spacing: 2px
+
+        font-size: 1.6em
+
+        border-radius: 10px
+
+        margin-bottom: 20px
+
+        background-color: variables.$bg-screen-themer1
+
+    .keypad
+        width: 100%
+
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+
+        background-color: variables.$bg-screen-themer1
+
+        padding: 30px
+
+        border-radius: 10px
+
+        column-gap: 20px
+
+        &-btns
+            display: flex
+            flex-wrap: wrap
+
+            gap: 20px
+
+            margin-bottom: 20px
+
+            li:nth-child(n)
+                width: calc(25% - 15px)
+                height: 55px
+
+                @include mixins.font()
+                @include mixins.flex-center()
+
+                border-radius: 5px
+                border-bottom: 5px solid variables.$normal-key2-background-themer1
+
+                color: variables.$text-key-themer1
+
+                cursor: pointer
+
+                background-color: variables.$normal-key-background-themer1
+
+                &:is(.dell-btn)
+                    color: variables.$text-key-hover-themer1
+                    background-color: variables.$reset-key-background-themer1
+                    border-bottom: 5px solid variables.$reset-key-shadow-themer1
+
+                    &:hover
+                        border-bottom: 3px solid variables.$reset-key-shadow-themer1
+
+
+                &:hover
+                    border-bottom: 3px solid variables.$normal-key2-background-themer1
+
+        .reset-btn,
+        .result-btn
+            text-transform: uppercase
+
+            width: calc(50% - 10px)
+            height: 60px
+
+            border-radius: 10px
+
+            @include mixins.font()
+            @include mixins.flex-center()
+
+            cursor: pointer
+
+            color: variables.$normal-key-background-themer1
+
+        .reset-btn
+            background-color: variables.$reset-key-background-themer1
+            border-bottom: 5px solid variables.$reset-key-shadow-themer1
+
+            &:hover
+                border-bottom: 3px solid variables.$reset-key-shadow-themer1
+                
+
+        .result-btn
+            background-color: variables.$equal-key-background-and-toggle-themer1
+            border-bottom: 5px solid variables.$equal-shadow-and-toggle-themer1
+
+            &:hover 
+                border-bottom: 3px solid variables.$equal-shadow-and-toggle-themer1
+

@@ -1,0 +1,1 @@
+const calc: number = 89

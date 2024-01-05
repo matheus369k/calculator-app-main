@@ -1,26 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculator App.">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="stylesheet" href="./src/css/style.css">
   <title>Frontend Mentor | Calculator app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
+
 <body>
+  <main class="container-calc">
+    <section class="header">
+      <h3 class="calc-name">Calc</h3>
+      <div class="container-themer">
+        <span class="name-themer">theme</span>
+        <nav class="switch-themer-container">
+          <li class="themer-1 active"></li>
+          <li class="themer-2"></li>
+          <li class="themer-3"></li>
+        </nav>
+      </div>
+    </section>
 
+    <section class="screen">
+      000009783
+    </section>
 
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+    <section class="keypad">
+      <ul class="keypad-btns">
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li class="dell-btn">del</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>+</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>-</li>
+        <li>.</li>
+        <li>0</li>
+        <li>/</li>
+        <li>x</li>
+      </ul>
+      <button class="reset-btn" id="reset">reset</button>
+      <button class="result-btn" id="result">=</button>
+    </section>
+  </main>
+  <script src="./src/server/index.js"></script>
 </body>
+
 </html>

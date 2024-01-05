@@ -4,8 +4,15 @@
   "description": "Calculate: project on process of the creation..",
   "main": "index.js",
   "scripts": {
+    "tsc": "tsc --watch ./src/ts/index.ts",
+    "sass": "sass --watch ./src/sass/style.sass:./src/css/style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "sass": "^1.69.7",
+    "typescript": "^5.3.3",
+    "yarn": "^1.22.21"
+  }
 }
