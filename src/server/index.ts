@@ -12,7 +12,7 @@ let numberCalc: string = '';
 
 const barToggleThemer = document.querySelectorAll('.btn');
 
-console.log(barToggleThemer);
+// console.log(barToggleThemer);
 
 barToggleThemer.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -23,9 +23,9 @@ barToggleThemer.forEach((btn) => {
 
             numberCalc = `${numberCalc}${btn.textContent}`
 
-        } else if (btn.textContent === '-' || 'x' || '/' || '+') {
+        } else if ((btn.textContent == '-' || 'x') || (btn.textContent == '/' || '+')) {
 
-            calcule.calcAll.push(numberCalc)
+            if (numberCalc) calcule.calcAll.push(numberCalc)
 
             calcule.calcAll.push(btn.textContent)
 
@@ -33,45 +33,152 @@ barToggleThemer.forEach((btn) => {
 
         }
 
-        AddRemoveScreenElement(btn.textContent)
+        if (btn.textContent !== '=') AddRemoveScreenElement(btn.textContent, false)
 
         console.log(calcule.calcAll)
-
     });
 });
 
+function Calc() {
 
-document.querySelector('#result')?.addEventListener('click', () => {
+    if (calcule.calcAll.includes('=')) calcule.calcAll.pop()
 
-    let calcDiviMultipl: number= 0;
+    if (calcule.calcAll.includes('x') || calcule.calcAll.includes('/')) {
 
-    calcule.calcAll.forEach((number, index)=>{
+        if (
+            (calcule.calcAll.indexOf('/') < calcule.calcAll.indexOf('x') && calcule.calcAll.includes('/')) ||
+            (calcule.calcAll.indexOf('/') > calcule.calcAll.indexOf('x') && !calcule.calcAll.includes('x'))
+        ) {
 
-        if (calcule.calcAll.indexOf('/') == 1) {
-    
-            calcDiviMultipl = Number(calcule.calcAll[index-1]) / Number(calcule.calcAll[index+1])
+            compostCalcSide(calcule.calcAll.indexOf('/'));
 
-            calcule.calcAll.splice(index-1, index+2)
-            
-            calcule.calcAll.calcDiviMultipl
-    
-        } 
-        
-        if (calcule.calcAll.indexOf('x') == 1) {
-    
-            calcDiviMultipl = Number(calcule.calcAll[index-1]) * Number(calcule.calcAll[index+1])
-
-            calcule.calcAll.splice(index-1, index+2)
         }
+
+        if (
+            (calcule.calcAll.indexOf('x') < calcule.calcAll.indexOf('/') && calcule.calcAll.includes('x')) ||
+            (calcule.calcAll.indexOf('x') > calcule.calcAll.indexOf('/') && !calcule.calcAll.includes('/'))
+        ) {
+
+            compostCalcSide(calcule.calcAll.indexOf('x'));
+
+        }
+
+    } else {
+
+        if (
+            (calcule.calcAll.indexOf('-') < calcule.calcAll.indexOf('+') && calcule.calcAll.includes('-')) ||
+            (calcule.calcAll.indexOf('-') > calcule.calcAll.indexOf('+') && !calcule.calcAll.includes('+'))
+        ) {
+
+            compostCalcSide(calcule.calcAll.indexOf('-'));
+        }
+
+        if (
+            (calcule.calcAll.indexOf('+') < calcule.calcAll.indexOf('-') && calcule.calcAll.includes('+')) ||
+            (calcule.calcAll.indexOf('+') > calcule.calcAll.indexOf('-') && !calcule.calcAll.includes('-'))
+        ) {
+
+            compostCalcSide(calcule.calcAll.indexOf('+'));
+
+        }
+    }
+
+
+}
+
+document.querySelector('#result')?.addEventListener('click', () => Calc());
+
+/*function singleCalc() {
+    console.log('single')
+
+    switch (calcule.calcAll[1]) {
+        case '+':
+            calcule.result = Number(calcule.calcAll[0]) + Number(calcule.calcAll[2]);
+            break
+        case '-':
+            calcule.result = Number(calcule.calcAll[0]) - Number(calcule.calcAll[2]);
+            break
+        case 'x':
+            calcule.result = Number(calcule.calcAll[0]) * Number(calcule.calcAll[2]);
+            break
+        case '/':
+            calcule.result = Number(calcule.calcAll[0]) / Number(calcule.calcAll[2]);
+            break
+    }
+
+    AddRemoveScreenElement(`${calcule.result}`, true)
+}*/
+
+function compostCalcSide(index: number) {
+
+    let calc: number = 0;
+
+    calcule.calcAll.forEach((item, index) => {
+
+        if (calcule.calcAll.includes('x') || calcule.calcAll.includes('/')) {
+
+            if (item == 'x') {
+
+                calc = Number(calcule.calcAll[index - 1]) * Number(calcule.calcAll[index + 1]);
+
+            } else {
+
+                calc = Number(calcule.calcAll[index - 1]) / Number(calcule.calcAll[index + 1]);
+
+            }
+
+        } else {
+
+            if (item == '-') {
+
+                calc = Number(calcule.calcAll[index - 1]) - Number(calcule.calcAll[index + 1]);
+
+            } else {
+
+                calc = Number(calcule.calcAll[index - 1]) + Number(calcule.calcAll[index + 1]);
+
+            }
+
+        }
+
+        calcule.calcAll.splice(index - 1, index + 2, `${calc}`)
 
     })
 
-    console.log(calcDiviMultipl)
+    
+    if (calcule.calcAll[index] == '/') {
+
+        calc = Number(calcule.calcAll[index - 1]) / Number(calcule.calcAll[index + 1]);
+
+    } else if (calcule.calcAll[index] == '-') {
+
+        calc = Number(calcule.calcAll[index - 1]) - Number(calcule.calcAll[index + 1]);
+
+    } else if (calcule.calcAll[index] == '+') {
+
+        calc = Number(calcule.calcAll[index - 1]) + Number(calcule.calcAll[index + 1])
+
+    } else if (calcule.calcAll[index] == 'x') {
+
+        calc = Number(calcule.calcAll[index - 1]) * Number(calcule.calcAll[index + 1]);
+
+    }
+
+
+
+    calcule.result = calc
+
+    console.log(calc)
     console.log(calcule.calcAll)
-})
 
+    if (calcule.calcAll.length <= 1) {
 
-function AddRemoveScreenElement(textElement: string) {
+        AddRemoveScreenElement(`${calcule.result}`, true)
+
+    } else Calc()
+}
+
+function AddRemoveScreenElement(textElement: string, confimation: boolean) {
 
     //console.log(textElement)
 
@@ -79,12 +186,20 @@ function AddRemoveScreenElement(textElement: string) {
 
     if (screenContainer === null || screenContainer.textContent == undefined) return
 
-    if (textElement != 'del' && 'reset') screenContainer.innerText += `${textElement}`;
+    if ((textElement != 'del' && 'reset')) screenContainer.innerText += `${textElement}`;
 
-    if (textElement == 'reset'){ 
+    if (textElement == 'reset') {
         screenContainer.innerText = '';
         calcule.calcAll = []
     }
+
+    if (confimation) {
+        screenContainer.innerText = `${textElement}`;
+        calcule.calcAll = [];
+        calcule.calcAll.push(`${calcule.result}`)
+
+    }
+    return
 
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "calculator-app-main",
   "version": "1.0.0",
-  "type": "module",
+  "type": "com",
   "description": "Calculate: project on process of the creation..",
   "main": "index.js",
   "scripts": {
