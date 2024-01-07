@@ -1,10 +1,12 @@
 interface Calcule {
     calcAll: string[];
+    caclUmount: string[];
     result: number;
 }
 
 let calcule: Calcule = {
     calcAll: [],
+    caclUmount: [],
     result: 0,
 };
 
@@ -12,194 +14,241 @@ let numberCalc: string = '';
 
 const barToggleThemer = document.querySelectorAll('.btn');
 
+function indexOfItem(indexOf: string): number {
+    return calcule.calcAll.indexOf(indexOf);
+}
+
+function includesItems(include: string): boolean {
+    return calcule.calcAll.includes(include);
+}
+
 // console.log(barToggleThemer);
 
 barToggleThemer.forEach((btn) => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+
+        e.stopPropagation();
 
         if (btn.textContent === null) return
 
-        if (parseInt(btn.textContent) || parseInt(btn.textContent) == 0 || btn.textContent == '.') {
+        mountCalc(btn.textContent)
 
-            numberCalc = `${numberCalc}${btn.textContent}`
+        //console.log(isNaN(Number(calcule.calcAll[calcule.calcAll.length - 1])))
 
-        } else if ((btn.textContent == '-' || 'x') || (btn.textContent == '/' || '+')) {
-
-            if (numberCalc) calcule.calcAll.push(numberCalc)
-
-            calcule.calcAll.push(btn.textContent)
-
-            numberCalc = '';
-
-        }
-
-        if (btn.textContent !== '=') AddRemoveScreenElement(btn.textContent, false)
-
-        console.log(calcule.calcAll)
+        //console.log(calcule.calcAll)
     });
 });
 
-function Calc() {
+function mountCalc(item: string) {
+    //console.log(calcule.caclUmount.length)
 
-    if (calcule.calcAll.includes('=')) calcule.calcAll.pop()
+    if (
+        (
+            item != 'del' &&
+            item != 'reset' &&
+            item != '.' &&
+            (
+                (
+                    item != '-' && calcule.caclUmount.length == 0
 
-    if (calcule.calcAll.includes('x') || calcule.calcAll.includes('/')) {
+                ) || (
 
-        if (
-            (calcule.calcAll.indexOf('/') < calcule.calcAll.indexOf('x') && calcule.calcAll.includes('/')) ||
-            (calcule.calcAll.indexOf('/') > calcule.calcAll.indexOf('x') && !calcule.calcAll.includes('x'))
-        ) {
+                    calcule.caclUmount.length != 0
+                )
+            )
+        ) && (
+            isNaN(parseInt(item)
+            ) && (
+                isNaN(Number(calcule.caclUmount[calcule.caclUmount.length - 1]))
+                ||
+                calcule.caclUmount.length == 0
+            )
+        )
+    ) {
 
-            compostCalcSide(calcule.calcAll.indexOf('/'));
+        return
 
-        }
-
-        if (
-            (calcule.calcAll.indexOf('x') < calcule.calcAll.indexOf('/') && calcule.calcAll.includes('x')) ||
-            (calcule.calcAll.indexOf('x') > calcule.calcAll.indexOf('/') && !calcule.calcAll.includes('/'))
-        ) {
-
-            compostCalcSide(calcule.calcAll.indexOf('x'));
-
-        }
-
-    } else {
-
-        if (
-            (calcule.calcAll.indexOf('-') < calcule.calcAll.indexOf('+') && calcule.calcAll.includes('-')) ||
-            (calcule.calcAll.indexOf('-') > calcule.calcAll.indexOf('+') && !calcule.calcAll.includes('+'))
-        ) {
-
-            compostCalcSide(calcule.calcAll.indexOf('-'));
-        }
-
-        if (
-            (calcule.calcAll.indexOf('+') < calcule.calcAll.indexOf('-') && calcule.calcAll.includes('+')) ||
-            (calcule.calcAll.indexOf('+') > calcule.calcAll.indexOf('-') && !calcule.calcAll.includes('-'))
-        ) {
-
-            compostCalcSide(calcule.calcAll.indexOf('+'));
-
-        }
     }
 
+    calcule.caclUmount.push(item)
+
+    AddRemoveScreenElement(calcule.caclUmount, false)
+
+    //console.log(calcule.caclUmount)
 
 }
 
-document.querySelector('#result')?.addEventListener('click', () => Calc());
+function Calc() {
 
-/*function singleCalc() {
-    console.log('single')
+    calcule.caclUmount = []
 
-    switch (calcule.calcAll[1]) {
-        case '+':
-            calcule.result = Number(calcule.calcAll[0]) + Number(calcule.calcAll[2]);
-            break
-        case '-':
-            calcule.result = Number(calcule.calcAll[0]) - Number(calcule.calcAll[2]);
-            break
-        case 'x':
-            calcule.result = Number(calcule.calcAll[0]) * Number(calcule.calcAll[2]);
-            break
-        case '/':
-            calcule.result = Number(calcule.calcAll[0]) / Number(calcule.calcAll[2]);
-            break
+    if (includesItems('x') || includesItems('/')) {
+
+        calcule.calcAll.forEach((item, index) => {
+            
+
+            if (item == 'x') {
+
+                compostCalcSide(index);
+
+            } 
+            
+            if (item == '/') {
+
+                compostCalcSide(index);
+
+            }
+
+        })
+
+    } else if (includesItems('+') || includesItems('-')) {
+
+        calcule.calcAll.forEach((item, index) => {
+
+            if (item == '+') {
+
+                compostCalcSide(index);
+
+            }
+            
+            if (item == '-') {
+
+                compostCalcSide(index);
+
+            }
+
+        })
+
+    } else if (calcule.calcAll.length <= 1) {
+
+        for (let index = 0; index < calcule.calcAll[0].length; index++) {
+
+            calcule.caclUmount.push(calcule.calcAll[0][index])
+
+        }
+
+        AddRemoveScreenElement(calcule.caclUmount, true)
+
+    }
+}
+
+document.querySelector('#result')?.addEventListener('click', (e) => {
+
+    e.stopPropagation();
+
+    calcule.caclUmount.push('=')
+
+    for (let index = 0; index < calcule.caclUmount.length; index++) {
+
+        if (
+            parseInt(calcule.caclUmount[index]) ||
+            parseInt(calcule.caclUmount[index]) == 0 ||
+            calcule.caclUmount[index] == '.' ||
+            (
+                calcule.caclUmount[index] == '-' && index == 0
+            )
+        ) {
+
+            numberCalc = `${numberCalc}${calcule.caclUmount[index]}`
+
+        } else if (!Number(calcule.caclUmount[index])) {
+
+            if (numberCalc) calcule.calcAll.push(numberCalc)
+
+            calcule.calcAll.push(calcule.caclUmount[index])
+
+            numberCalc = '';
+        }
+
     }
 
-    AddRemoveScreenElement(`${calcule.result}`, true)
-}*/
+    //console.log(calcule.calcAll)
+
+    if (calcule.caclUmount.includes('=')) calcule.caclUmount.pop()
+    if (calcule.calcAll.includes('=')) calcule.calcAll.pop()
+
+    if (Number(calcule.caclUmount[calcule.caclUmount.length - 1])) Calc()
+
+});
 
 function compostCalcSide(index: number) {
 
     let calc: number = 0;
+    var cont = 0;
 
-    calcule.calcAll.forEach((item, index) => {
+    switch (calcule.calcAll[index]) {
 
-        if (calcule.calcAll.includes('x') || calcule.calcAll.includes('/')) {
+        case '/':
 
-            if (item == 'x') {
+            calc = Number(calcule.calcAll[index - 1]) / Number(calcule.calcAll[index + 1]);
+            cont++
 
-                calc = Number(calcule.calcAll[index - 1]) * Number(calcule.calcAll[index + 1]);
+            break
 
-            } else {
+        case 'x':
 
-                calc = Number(calcule.calcAll[index - 1]) / Number(calcule.calcAll[index + 1]);
+            calc = Number(calcule.calcAll[index - 1]) * Number(calcule.calcAll[index + 1]);
+            cont++
 
-            }
+            break
 
-        } else {
+        case '+':
 
-            if (item == '-') {
+            calc = Number(calcule.calcAll[index - 1]) + Number(calcule.calcAll[index + 1]);
+            cont++
 
-                calc = Number(calcule.calcAll[index - 1]) - Number(calcule.calcAll[index + 1]);
+            break
 
-            } else {
+        case '-':
 
-                calc = Number(calcule.calcAll[index - 1]) + Number(calcule.calcAll[index + 1]);
+            calc = Number(calcule.calcAll[index - 1]) - Number(calcule.calcAll[index + 1]);
+            cont++
 
-            }
-
-        }
-
-        calcule.calcAll.splice(index - 1, index + 2, `${calc}`)
-
-    })
-
-    
-    if (calcule.calcAll[index] == '/') {
-
-        calc = Number(calcule.calcAll[index - 1]) / Number(calcule.calcAll[index + 1]);
-
-    } else if (calcule.calcAll[index] == '-') {
-
-        calc = Number(calcule.calcAll[index - 1]) - Number(calcule.calcAll[index + 1]);
-
-    } else if (calcule.calcAll[index] == '+') {
-
-        calc = Number(calcule.calcAll[index - 1]) + Number(calcule.calcAll[index + 1])
-
-    } else if (calcule.calcAll[index] == 'x') {
-
-        calc = Number(calcule.calcAll[index - 1]) * Number(calcule.calcAll[index + 1]);
-
+            break
     }
 
-
-
-    calcule.result = calc
-
-    console.log(calc)
+    console.log(calc, index, cont)
     console.log(calcule.calcAll)
 
-    if (calcule.calcAll.length <= 1) {
+    calcule.calcAll.splice(index - 1, index + 2, `${calc}`)
 
-        AddRemoveScreenElement(`${calcule.result}`, true)
-
-    } else Calc()
+    Calc()
 }
 
-function AddRemoveScreenElement(textElement: string, confimation: boolean) {
+function AddRemoveScreenElement(textElement: string[], confimation: boolean) {
 
     //console.log(textElement)
 
     const screenContainer: HTMLElement | null = document.getElementById('screen');
 
-    if (screenContainer === null || screenContainer.textContent == undefined) return
+    if (screenContainer === null) return
 
-    if ((textElement != 'del' && 'reset')) screenContainer.innerText += `${textElement}`;
+    if (confimation) calcule.calcAll = []
 
-    if (textElement == 'reset') {
-        screenContainer.innerText = '';
-        calcule.calcAll = []
+    for (const index in textElement) {
+
+        if (textElement[index] == '=') continue
+
+        if (textElement.includes('del')) calcule.caclUmount.splice(textElement.length - 2, textElement.length);
+
+        if (textElement.includes('reset')) {
+
+            calcule.caclUmount = []
+
+            break
+
+        } else if (parseInt(index) === 0) {
+
+            screenContainer.innerText = `${textElement[index]}`;
+
+        } else {
+
+            screenContainer.innerText += `${textElement[index]}`;
+
+        }
     }
 
-    if (confimation) {
-        screenContainer.innerText = `${textElement}`;
-        calcule.calcAll = [];
-        calcule.calcAll.push(`${calcule.result}`)
-
-    }
-    return
+    if (calcule.caclUmount.length == 0) screenContainer.innerText = '';
 
 }
 
