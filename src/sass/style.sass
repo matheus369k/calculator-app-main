@@ -4,11 +4,14 @@
 
 @import 'reset'
 
+@import 'themer'
+
+@import 'animation'
+
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap')
 
 html, body
     @include mixins.font()
-    background-color: variables.$bg-body-themer-1
 
     overflow: hidden
 
@@ -34,7 +37,6 @@ html, body
         width: 100%
         height: min-content
 
-        color: variables.$text-key-light-themer-1
         font-size: 16px
 
         display: flex
@@ -59,15 +61,12 @@ html, body
 
                 letter-spacing: 1px
 
-                color: variables.$text-key-light-themer-1
 
-            .switch-themer-container
+            .switch-themer-container ul
                 width: min-content
                 height: min-content
 
                 position: relative
-
-                background-color: variables.$bg-toggle-keypad-themer-1
 
                 display: flex
                 flex-direction: row
@@ -86,7 +85,7 @@ html, body
                     cursor: pointer
 
                     &:is(.active)
-                        background-color: variables.$equal-key-bg-toggle-themer-1
+                        animation: toggle-control 1s ease-in-out
 
                     &::before
                         content: ''
@@ -116,17 +115,22 @@ html, body
         display: flex
         align-items: center
 
-        padding: 0 25px
+        overflow-y: scroll
 
-        color: variables.$text-key-light-themer-1
+        border-right: none
 
         letter-spacing: 2px
 
         font-size: 1.6em
 
+        text-align: justify 
+
         border-radius: 10px
 
-        background-color: variables.$bg-screen-themer-1
+        &::-webkit-scrollbar
+            opacity: 0
+            
+            
 
     .keypad
         width: 100%
@@ -134,8 +138,6 @@ html, body
         display: flex
         flex-direction: row
         flex-wrap: wrap
-
-        background-color: variables.$bg-toggle-keypad-themer-1
 
         padding: 30px
 
@@ -159,20 +161,12 @@ html, body
                 @include mixins.flex-center()
 
                 border-radius: 10px
-                border-bottom: 5px solid variables.$normal-key-themer-1-shadow
-
-                color: variables.$text-key-dark-themer-1
 
                 cursor: pointer
-
-                background-color: variables.$normal-key-bg-themer-1
 
                 transition: .7s easy-in-out
 
                 &:is(.dell-btn)
-                    color: variables.$text-key-light-themer-1
-                    background-color: variables.$reset-key-bg-themer-1
-                    border-bottom: 5px solid variables.$reset-key-themer-1-shadow
 
                     &:hover
                         border-width: 3px 
@@ -195,19 +189,13 @@ html, body
 
             cursor: pointer
 
-            color: variables.$text-key-light-themer-1
-
         .reset-btn
-            background-color: variables.$reset-key-bg-themer-1
-            border-bottom: 5px solid variables.$reset-key-themer-1-shadow
 
             &:hover
                 border-width: 3px 
                 
 
         .result-btn
-            background-color: variables.$equal-key-bg-toggle-themer-1
-            border-bottom: 5px solid variables.$equal-key-toggle-themer-1-shadow
 
             &:hover 
                 border-width: 3px 

@@ -9,11 +9,165 @@
   outline: none;
 }
 
+.themer-1-active {
+  background-color: hsl(222, 26%, 31%);
+}
+.themer-1-active .header {
+  color: hsl(0, 0%, 100%);
+}
+.themer-1-active .header .container-themer .name-themer {
+  color: hsl(0, 0%, 100%);
+}
+.themer-1-active .header .container-themer .switch-themer-container ul {
+  background-color: hsl(223, 31%, 20%);
+}
+.themer-1-active .header .container-themer .switch-themer-container ul li:is(.active) {
+  background-color: hsl(5, 93%, 60%);
+}
+.themer-1-active .screen {
+  border: 20px solid hsl(224, 36%, 15%);
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(224, 36%, 15%);
+}
+.themer-1-active .keypad {
+  background-color: hsl(223, 31%, 20%);
+}
+.themer-1-active .keypad-btns li:nth-child(n) {
+  border-bottom: 5px solid hsl(28, 16%, 65%);
+  color: hsl(221, 14%, 31%);
+  background-color: hsl(30, 25%, 89%);
+}
+.themer-1-active .keypad-btns li:nth-child(n):is(.dell-btn) {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(222, 26%, 31%);
+  border-bottom: 5px solid hsl(223, 51%, 20%);
+}
+.themer-1-active .keypad .reset-btn,
+.themer-1-active .keypad .result-btn {
+  background-color: hsl(222, 26%, 31%);
+  border-bottom: 5px solid hsl(223, 51%, 20%);
+  color: hsl(0, 0%, 100%);
+}
+.themer-1-active .keypad .reset-btn {
+  background-color: hsl(222, 26%, 31%);
+  border-bottom: 5px solid hsl(223, 51%, 20%);
+}
+.themer-1-active .keypad .result-btn {
+  background-color: hsl(5, 93%, 60%);
+  border-bottom: 5px solid hsl(6, 70%, 34%);
+}
+
+.themer-2-active {
+  background-color: hsl(0, 0%, 90%);
+}
+.themer-2-active .header {
+  color: hsl(60, 10%, 19%);
+}
+.themer-2-active .header .container-themer .name-themer {
+  color: hsl(60, 10%, 19%);
+}
+.themer-2-active .header .container-themer .switch-themer-container ul {
+  background-color: hsl(0, 5%, 81%);
+}
+.themer-2-active .header .container-themer .switch-themer-container ul li:is(.active) {
+  background-color: hsl(25, 98%, 40%);
+}
+.themer-2-active .screen {
+  border: 20px solid hsl(0, 0%, 93%);
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(0, 0%, 93%);
+}
+.themer-2-active .keypad {
+  background-color: hsl(0, 5%, 81%);
+}
+.themer-2-active .keypad-btns li:nth-child(n) {
+  border-bottom: 5px solid hsl(35, 11%, 61%);
+  color: hsl(60, 10%, 19%);
+  background-color: hsl(45, 7%, 89%);
+}
+.themer-2-active .keypad-btns li:nth-child(n):is(.dell-btn) {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(185, 42%, 37%);
+  border-bottom: 5px solid hsl(185, 58%, 25%);
+}
+.themer-2-active .keypad .reset-btn,
+.themer-2-active .keypad .result-btn {
+  background-color: hsl(185, 42%, 37%);
+  border-bottom: 5px solid hsl(185, 58%, 25%);
+  color: hsl(0, 0%, 100%);
+}
+.themer-2-active .keypad .reset-btn {
+  background-color: hsl(185, 42%, 37%);
+  border-bottom: 5px solid hsl(185, 58%, 25%);
+}
+.themer-2-active .keypad .result-btn {
+  background-color: hsl(25, 98%, 40%);
+  border-bottom: 5px solid hsl(25, 99%, 27%);
+}
+
+.themer-3-active {
+  background-color: hsl(268, 75%, 9%);
+}
+.themer-3-active .header {
+  color: hsl(52, 100%, 62%);
+}
+.themer-3-active .header .container-themer .name-themer {
+  color: hsl(52, 100%, 62%);
+}
+.themer-3-active .header .container-themer .switch-themer-container ul {
+  background-color: hsl(268, 71%, 12%);
+}
+.themer-3-active .header .container-themer .switch-themer-container ul li:is(.active) {
+  background-color: hsl(176, 100%, 44%);
+}
+.themer-3-active .screen {
+  border: 20px solid hsl(268, 71%, 12%);
+  color: hsl(52, 100%, 62%);
+  background-color: hsl(268, 71%, 12%);
+}
+.themer-3-active .keypad {
+  background-color: hsl(268, 71%, 12%);
+}
+.themer-3-active .keypad-btns li:nth-child(n) {
+  border-bottom: 5px solid hsl(285, 91%, 52%);
+  color: hsl(52, 100%, 62%);
+  background-color: hsl(268, 47%, 21%);
+}
+.themer-3-active .keypad-btns li:nth-child(n):is(.dell-btn) {
+  color: hsl(52, 100%, 62%);
+  background-color: hsl(281, 89%, 26%);
+  border-bottom: 5px solid hsl(285, 91%, 52%);
+}
+.themer-3-active .keypad .reset-btn,
+.themer-3-active .keypad .result-btn {
+  background-color: hsl(281, 89%, 26%);
+  border-bottom: 5px solid hsl(285, 91%, 52%);
+}
+.themer-3-active .keypad .reset-btn {
+  background-color: hsl(281, 89%, 26%);
+  border-bottom: 5px solid hsl(285, 91%, 52%);
+  color: hsl(0, 0%, 100%);
+}
+.themer-3-active .keypad .result-btn {
+  color: hsl(52, 100%, 62%);
+  background-color: hsl(176, 100%, 44%);
+  border-bottom: 5px solid hsl(177, 92%, 70%);
+}
+
+@keyframes toggle-control {
+  0% {
+    opacity: 0;
+    transform: scale(-5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 html, body {
   font-size: 32px;
   font-family: "League Spartan", sans-serif;
   font-weight: 700;
-  background-color: hsl(222, 26%, 31%);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -33,7 +187,6 @@ html, body {
 .container-calc .header {
   width: 100%;
   height: min-content;
-  color: hsl(0, 0%, 100%);
   font-size: 16px;
   display: flex;
   flex-direction: row;
@@ -52,43 +205,41 @@ html, body {
   font-size: 14px;
   align-self: flex-end;
   letter-spacing: 1px;
-  color: hsl(0, 0%, 100%);
 }
-.container-calc .header .container-themer .switch-themer-container {
+.container-calc .header .container-themer .switch-themer-container ul {
   width: min-content;
   height: min-content;
   position: relative;
-  background-color: hsl(223, 31%, 20%);
   display: flex;
   flex-direction: row;
   padding: 4px;
   border-radius: 20px;
   column-gap: 5px;
 }
-.container-calc .header .container-themer .switch-themer-container li {
+.container-calc .header .container-themer .switch-themer-container ul li {
   padding: 8px;
   border-radius: 20px;
   cursor: pointer;
 }
-.container-calc .header .container-themer .switch-themer-container li:is(.active) {
-  background-color: hsl(5, 93%, 60%);
+.container-calc .header .container-themer .switch-themer-container ul li:is(.active) {
+  animation: toggle-control 1s ease-in-out;
 }
-.container-calc .header .container-themer .switch-themer-container li::before {
+.container-calc .header .container-themer .switch-themer-container ul li::before {
   content: "";
   position: absolute;
   top: -15px;
   font-size: 12px;
 }
-.container-calc .header .container-themer .switch-themer-container .themer-1::before {
+.container-calc .header .container-themer .switch-themer-container ul .themer-1::before {
   content: "1";
   left: 8px;
 }
-.container-calc .header .container-themer .switch-themer-container .themer-2::before {
+.container-calc .header .container-themer .switch-themer-container ul .themer-2::before {
   content: "2";
   left: 50%;
   transform: translateX(-50%);
 }
-.container-calc .header .container-themer .switch-themer-container .themer-3::before {
+.container-calc .header .container-themer .switch-themer-container ul .themer-3::before {
   content: "3";
   right: 8px;
 }
@@ -97,19 +248,21 @@ html, body {
   height: 120px;
   display: flex;
   align-items: center;
-  padding: 0 25px;
-  color: hsl(0, 0%, 100%);
+  overflow-y: scroll;
+  border-right: none;
   letter-spacing: 2px;
   font-size: 1.6em;
+  text-align: justify;
   border-radius: 10px;
-  background-color: hsl(224, 36%, 15%);
+}
+.container-calc .screen::-webkit-scrollbar {
+  opacity: 0;
 }
 .container-calc .keypad {
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: hsl(223, 31%, 20%);
   padding: 30px;
   border-radius: 10px;
   column-gap: 20px;
@@ -130,16 +283,8 @@ html, body {
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  border-bottom: 5px solid hsl(28, 16%, 65%);
-  color: hsl(221, 14%, 31%);
   cursor: pointer;
-  background-color: hsl(30, 25%, 89%);
   transition: 0.7s easy-in-out;
-}
-.container-calc .keypad-btns li:nth-child(n):is(.dell-btn) {
-  color: hsl(0, 0%, 100%);
-  background-color: hsl(222, 26%, 31%);
-  border-bottom: 5px solid hsl(223, 51%, 20%);
 }
 .container-calc .keypad-btns li:nth-child(n):is(.dell-btn):hover {
   border-width: 3px;
@@ -160,18 +305,9 @@ html, body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: hsl(0, 0%, 100%);
-}
-.container-calc .keypad .reset-btn {
-  background-color: hsl(222, 26%, 31%);
-  border-bottom: 5px solid hsl(223, 51%, 20%);
 }
 .container-calc .keypad .reset-btn:hover {
   border-width: 3px;
-}
-.container-calc .keypad .result-btn {
-  background-color: hsl(5, 93%, 60%);
-  border-bottom: 5px solid hsl(6, 70%, 34%);
 }
 .container-calc .keypad .result-btn:hover {
   border-width: 3px;

@@ -22,25 +22,48 @@ function includesItems(include: string): boolean {
     return calcule.calcAll.includes(include);
 }
 
-// console.log(barToggleThemer);
+class Numbers {
+    number1: number;
+    number2: number;
+
+    constructor(setNumber1: number, setNumber2: number) {
+        this.number1 = setNumber1;
+        this.number2 = setNumber2;
+    };
+
+    get sum() {
+        return this.number1 + this.number2;
+    };
+
+    get mult() {
+        return this.number1 * this.number2;
+    };
+
+    get divi() {
+        return this.number1 / this.number2;
+    };
+
+    get subtr() {
+        return this.number1 - this.number2;
+    };
+};
+
+
 
 barToggleThemer.forEach((btn) => {
     btn.addEventListener('click', (e) => {
+        console.log('foreach-btn()')
 
         e.stopPropagation();
 
         if (btn.textContent === null) return
 
         mountCalc(btn.textContent)
-
-        //console.log(isNaN(Number(calcule.calcAll[calcule.calcAll.length - 1])))
-
-        //console.log(calcule.calcAll)
     });
 });
 
 function mountCalc(item: string) {
-    //console.log(calcule.caclUmount.length)
+    console.log('mountCalc()')
 
     if (
         (
@@ -74,52 +97,15 @@ function mountCalc(item: string) {
 
     AddRemoveScreenElement(calcule.caclUmount, false)
 
-    //console.log(calcule.caclUmount)
-
 }
 
 function Calc() {
+    console.log('Calc()')
 
     calcule.caclUmount = []
 
-    if (includesItems('x') || includesItems('/')) {
 
-        calcule.calcAll.forEach((item, index) => {
-            
-
-            if (item == 'x') {
-
-                compostCalcSide(index);
-
-            } 
-            
-            if (item == '/') {
-
-                compostCalcSide(index);
-
-            }
-
-        })
-
-    } else if (includesItems('+') || includesItems('-')) {
-
-        calcule.calcAll.forEach((item, index) => {
-
-            if (item == '+') {
-
-                compostCalcSide(index);
-
-            }
-            
-            if (item == '-') {
-
-                compostCalcSide(index);
-
-            }
-
-        })
-
-    } else if (calcule.calcAll.length <= 1) {
+    if (calcule.calcAll.length <= 1) {
 
         for (let index = 0; index < calcule.calcAll[0].length; index++) {
 
@@ -129,10 +115,42 @@ function Calc() {
 
         AddRemoveScreenElement(calcule.caclUmount, true)
 
+        return
+
     }
+
+    calcule.calcAll.forEach(async (item, index) => {
+
+        console.log(index)
+
+        if (item === 'x') {
+
+            await compostCalcSide(index)
+
+        } else if (item === '/') {
+
+            await compostCalcSide(index)
+
+        }
+
+        if (!includesItems('x') && !includesItems('/')) {
+
+            if (item === '+') {
+
+                await compostCalcSide(index)
+
+            } else if (item === '-') {
+
+                await compostCalcSide(index)
+
+            }
+        }
+
+    })
 }
 
 document.querySelector('#result')?.addEventListener('click', (e) => {
+    console.log('result-addeventlistener()')
 
     e.stopPropagation();
 
@@ -162,8 +180,6 @@ document.querySelector('#result')?.addEventListener('click', (e) => {
 
     }
 
-    //console.log(calcule.calcAll)
-
     if (calcule.caclUmount.includes('=')) calcule.caclUmount.pop()
     if (calcule.calcAll.includes('=')) calcule.calcAll.pop()
 
@@ -171,59 +187,61 @@ document.querySelector('#result')?.addEventListener('click', (e) => {
 
 });
 
-function compostCalcSide(index: number) {
+async function compostCalcSide(index: number) {
+    console.log('compostCalcSide()')
 
-    let calc: number = 0;
-    var cont = 0;
+    calcule.result = 0;
+
+    const number1 = Number(calcule.calcAll[index - 1]);
+    const number2 = Number(calcule.calcAll[index + 1]);
+
+    const numbers = new Numbers(number1, number2)
+
+
+    console.log(calcule.calcAll)
 
     switch (calcule.calcAll[index]) {
 
         case '/':
 
-            calc = Number(calcule.calcAll[index - 1]) / Number(calcule.calcAll[index + 1]);
-            cont++
-
+            calcule.result = numbers.divi
             break
 
         case 'x':
 
-            calc = Number(calcule.calcAll[index - 1]) * Number(calcule.calcAll[index + 1]);
-            cont++
-
+            calcule.result = numbers.mult
             break
 
         case '+':
 
-            calc = Number(calcule.calcAll[index - 1]) + Number(calcule.calcAll[index + 1]);
-            cont++
-
+            calcule.result = numbers.sum
             break
 
         case '-':
 
-            calc = Number(calcule.calcAll[index - 1]) - Number(calcule.calcAll[index + 1]);
-            cont++
+            calcule.result = numbers.subtr
+            break
 
+        default:
             break
     }
 
-    console.log(calc, index, cont)
-    console.log(calcule.calcAll)
-
-    calcule.calcAll.splice(index - 1, index + 2, `${calc}`)
+    const numberremove = calcule.calcAll.splice(index - 1, 3, `${calcule.result}`)
 
     Calc()
 }
 
 function AddRemoveScreenElement(textElement: string[], confimation: boolean) {
-
-    //console.log(textElement)
+    console.log('AddRemoveScreenElement()')
 
     const screenContainer: HTMLElement | null = document.getElementById('screen');
 
     if (screenContainer === null) return
 
     if (confimation) calcule.calcAll = []
+
+    let breakLineCont: number = 14;
+    let breakLineMet: string = '';
 
     for (const index in textElement) {
 
@@ -241,6 +259,19 @@ function AddRemoveScreenElement(textElement: string[], confimation: boolean) {
 
             screenContainer.innerText = `${textElement[index]}`;
 
+        } else if (parseInt(index) === breakLineCont) {
+
+            breakLineMet = ''
+            if  (parseInt(index) == 14){
+                screenContainer.style.fontSize = '1.2em';
+                breakLineCont = 19
+            } else {
+                breakLineMet = '\n'
+                breakLineCont += 20
+            }
+
+            screenContainer.innerText += `${textElement[index]}${breakLineMet}`;
+
         } else {
 
             screenContainer.innerText += `${textElement[index]}`;
@@ -252,3 +283,20 @@ function AddRemoveScreenElement(textElement: string[], confimation: boolean) {
 
 }
 
+
+
+// switch themer
+
+
+document.querySelectorAll('.switchThemerbtn').forEach((btn,index) =>{
+    btn.addEventListener('click', () =>{
+        console.log(document.body.className)
+
+        document.body.classList.replace(`${document.body.className}`, `themer-${index + 1}-active`);
+
+        document.querySelector('.active')?.classList.remove('active');
+
+        document.querySelector(`.themer-${index+1}`)?.classList.add('active')
+
+    })
+})

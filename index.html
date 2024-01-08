@@ -10,7 +10,7 @@
   <title>Frontend Mentor | Calculator app</title>
 </head>
 
-<body>
+<body class="themer-1-active">
   <main class="container-calc">
 
     <section class="header">
@@ -23,11 +23,14 @@
 
         <nav id="toggleThemer" class="switch-themer-container">
 
-          <li class="themer-1 active"></li>
+          <ul>
 
-          <li class="themer-2"></li>
+            <li class="themer-1 switchThemerbtn active"></li>
 
-          <li class="themer-3"></li>
+            <li class="themer-2 switchThemerbtn"></li>
+            
+            <li class="themer-3 switchThemerbtn"></li>
+          </ul>
 
         </nav>
       </div>
@@ -56,8 +59,8 @@
         <li class="btn">/</li>
         <li class="btn">x</li>
       </ul>
-      <button class="reset-btn btn" id="reset">reset</button>
-      <button class="result-btn" id="result">=</button>
+      <button type="button" class="reset-btn btn" id="reset">reset</button>
+      <button type="button"  class="result-btn" id="result">=</button>
     </section>
   </main>
   <script type="module" src="./src/server/index.js"></script>
