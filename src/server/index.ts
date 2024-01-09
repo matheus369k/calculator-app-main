@@ -1,3 +1,6 @@
+
+// criando funções, arrays e variaveis....
+
 interface Calcule {
     calcAll: string[];
     caclUmount: string[];
@@ -10,17 +13,19 @@ let calcule: Calcule = {
     result: 0,
 };
 
+
+
 let numberCalc: string = '';
 
 const barToggleThemer = document.querySelectorAll('.btn');
 
-function indexOfItem(indexOf: string): number {
-    return calcule.calcAll.indexOf(indexOf);
+
+
+function includesItems(array: string[] ,include: string): boolean {
+    return array.includes(include);
 }
 
-function includesItems(include: string): boolean {
-    return calcule.calcAll.includes(include);
-}
+
 
 class Numbers {
     number1: number;
@@ -49,10 +54,11 @@ class Numbers {
 };
 
 
+// detectando o click...
 
 barToggleThemer.forEach((btn) => {
     btn.addEventListener('click', (e) => {
-        console.log('foreach-btn()')
+        // console.log('foreach-btn()')
 
         e.stopPropagation();
 
@@ -62,14 +68,14 @@ barToggleThemer.forEach((btn) => {
     });
 });
 
+// separando oque faz parte do calculo e oque não....
 function mountCalc(item: string) {
-    console.log('mountCalc()')
+    // console.log('mountCalc()')
 
     if (
         (
             item != 'del' &&
             item != 'reset' &&
-            item != '.' &&
             (
                 (
                     item != '-' && calcule.caclUmount.length == 0
@@ -93,14 +99,17 @@ function mountCalc(item: string) {
 
     }
 
+    if (includesItems(calcule.caclUmount, 'e') && item != 'reset') return
+
     calcule.caclUmount.push(item)
 
     AddRemoveScreenElement(calcule.caclUmount, false)
 
 }
 
+// fanzendo os calculos por order dos operadores e aparição...
 function Calc() {
-    console.log('Calc()')
+    // console.log('Calc()')
 
     calcule.caclUmount = []
 
@@ -118,10 +127,7 @@ function Calc() {
         return
 
     }
-
     calcule.calcAll.forEach(async (item, index) => {
-
-        console.log(index)
 
         if (item === 'x') {
 
@@ -133,7 +139,7 @@ function Calc() {
 
         }
 
-        if (!includesItems('x') && !includesItems('/')) {
+        if (!includesItems(calcule.calcAll, 'x') && !includesItems(calcule.calcAll, '/')) {
 
             if (item === '+') {
 
@@ -149,8 +155,10 @@ function Calc() {
     })
 }
 
+
+// Organizando os dados obtidos em uma nova Array para calcular o valor...
 document.querySelector('#result')?.addEventListener('click', (e) => {
-    console.log('result-addeventlistener()')
+    // console.log('result-addeventlistener()')
 
     e.stopPropagation();
 
@@ -180,15 +188,16 @@ document.querySelector('#result')?.addEventListener('click', (e) => {
 
     }
 
-    if (calcule.caclUmount.includes('=')) calcule.caclUmount.pop()
-    if (calcule.calcAll.includes('=')) calcule.calcAll.pop()
+    if (includesItems(calcule.caclUmount, '=')) calcule.caclUmount.pop()
+    if (includesItems(calcule.calcAll, '=')) calcule.calcAll.pop()
 
     if (Number(calcule.caclUmount[calcule.caclUmount.length - 1])) Calc()
 
 });
 
+// calculando
 async function compostCalcSide(index: number) {
-    console.log('compostCalcSide()')
+    // console.log('compostCalcSide()')
 
     calcule.result = 0;
 
@@ -198,7 +207,7 @@ async function compostCalcSide(index: number) {
     const numbers = new Numbers(number1, number2)
 
 
-    console.log(calcule.calcAll)
+    // console.log(calcule.calcAll)
 
     switch (calcule.calcAll[index]) {
 
@@ -231,8 +240,9 @@ async function compostCalcSide(index: number) {
     Calc()
 }
 
+// Adicionar a tela os valores digitados e resultados
 function AddRemoveScreenElement(textElement: string[], confimation: boolean) {
-    console.log('AddRemoveScreenElement()')
+    // console.log('AddRemoveScreenElement()')
 
     const screenContainer: HTMLElement | null = document.getElementById('screen');
 
@@ -247,9 +257,9 @@ function AddRemoveScreenElement(textElement: string[], confimation: boolean) {
 
         if (textElement[index] == '=') continue
 
-        if (textElement.includes('del')) calcule.caclUmount.splice(textElement.length - 2, textElement.length);
+        if (includesItems(textElement, 'del')) calcule.caclUmount.splice(textElement.length - 2, textElement.length);
 
-        if (textElement.includes('reset')) {
+        if (includesItems(textElement, 'reset')) {
 
             calcule.caclUmount = []
 
@@ -262,12 +272,17 @@ function AddRemoveScreenElement(textElement: string[], confimation: boolean) {
         } else if (parseInt(index) === breakLineCont) {
 
             breakLineMet = ''
-            if  (parseInt(index) == 14){
+            
+            if (parseInt(index) == 14){
+
                 screenContainer.style.fontSize = '1.2em';
-                breakLineCont = 19
+                breakLineCont = 18
+
             } else {
+
                 breakLineMet = '\n'
-                breakLineCont += 20
+                breakLineCont += 19
+
             }
 
             screenContainer.innerText += `${textElement[index]}${breakLineMet}`;
@@ -279,6 +294,13 @@ function AddRemoveScreenElement(textElement: string[], confimation: boolean) {
         }
     }
 
+    if (textElement.length < 15) {
+
+        screenContainer.style.fontSize = '1.6em';
+        breakLineCont = 14
+
+    }
+
     if (calcule.caclUmount.length == 0) screenContainer.innerText = '';
 
 }
@@ -286,11 +308,9 @@ function AddRemoveScreenElement(textElement: string[], confimation: boolean) {
 
 
 // switch themer
-
-
 document.querySelectorAll('.switchThemerbtn').forEach((btn,index) =>{
     btn.addEventListener('click', () =>{
-        console.log(document.body.className)
+        // console.log(document.body.className)
 
         document.body.classList.replace(`${document.body.className}`, `themer-${index + 1}-active`);
 

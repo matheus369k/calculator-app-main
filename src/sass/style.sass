@@ -10,6 +10,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap')
 
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap')
+
 html, body
     @include mixins.font()
 
@@ -25,13 +27,20 @@ html, body
     width: 100vw
 
 .container-calc
-    width: 500px
+    max-width: 500px
     height: 600px
+
+    animation: toggle-themer 1.5s ease-out
 
     display: flex
     flex-direction: column
 
     row-gap: 20px
+
+    @include mixins.responsive()
+        min-width: variables.$min-width
+        padding: 0 10px
+    
 
     .header
         width: 100%
@@ -85,7 +94,6 @@ html, body
                     cursor: pointer
 
                     &:is(.active)
-                        animation: toggle-control 1s ease-in-out
 
                     &::before
                         content: ''
@@ -109,26 +117,20 @@ html, body
                     right: 8px
 
     .screen
-        width: 500px
+        width: 100%
         height: 120px
 
         display: flex
         align-items: center
+        justify-content: center
 
-        overflow-y: scroll
-
-        border-right: none
+        overflow: hidden
 
         letter-spacing: 2px
 
         font-size: 1.6em
 
-        text-align: justify 
-
         border-radius: 10px
-
-        &::-webkit-scrollbar
-            opacity: 0
             
             
 
@@ -145,6 +147,9 @@ html, body
 
         column-gap: 20px
 
+        @include mixins.responsive()
+            padding: 15px
+
         &-btns
             display: flex
             flex-wrap: wrap
@@ -160,11 +165,17 @@ html, body
                 @include mixins.font()
                 @include mixins.flex-center()
 
+                user-select: none
+
                 border-radius: 10px
 
                 cursor: pointer
 
                 transition: .7s easy-in-out
+
+                @include mixins.responsive-400()
+                    height: 40px
+                
 
                 &:is(.dell-btn)
 
@@ -182,12 +193,17 @@ html, body
             width: calc(50% - 10px)
             height: 60px
 
+            user-select: none
+
             border-radius: 10px
 
             @include mixins.font()
             @include mixins.flex-center()
 
             cursor: pointer
+
+            @include mixins.responsive-400()
+                height: 50px
 
         .reset-btn
 

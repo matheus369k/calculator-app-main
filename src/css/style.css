@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +26,7 @@
   background-color: hsl(5, 93%, 60%);
 }
 .themer-1-active .screen {
-  border: 20px solid hsl(224, 36%, 15%);
+  border: 5px solid hsl(224, 36%, 15%);
   color: hsl(0, 0%, 100%);
   background-color: hsl(224, 36%, 15%);
 }
@@ -73,8 +74,8 @@
   background-color: hsl(25, 98%, 40%);
 }
 .themer-2-active .screen {
-  border: 20px solid hsl(0, 0%, 93%);
-  color: hsl(0, 0%, 100%);
+  border: 5px solid hsl(0, 0%, 93%);
+  color: hsl(60, 10%, 19%);
   background-color: hsl(0, 0%, 93%);
 }
 .themer-2-active .keypad {
@@ -121,7 +122,7 @@
   background-color: hsl(176, 100%, 44%);
 }
 .themer-3-active .screen {
-  border: 20px solid hsl(268, 71%, 12%);
+  border: 5px solid hsl(268, 71%, 12%);
   color: hsl(52, 100%, 62%);
   background-color: hsl(268, 71%, 12%);
 }
@@ -154,14 +155,14 @@
   border-bottom: 5px solid hsl(177, 92%, 70%);
 }
 
-@keyframes toggle-control {
+@keyframes toggle-themer {
   0% {
-    opacity: 0;
-    transform: scale(-5);
+    opacity: 0.5;
+    transform: translateY(-50px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
 }
 html, body {
@@ -176,13 +177,25 @@ html, body {
   height: 100vh;
   width: 100vw;
 }
+@media (max-width: 424px) {
+  html, body {
+    font-size: 22px;
+  }
+}
 
 .container-calc {
-  width: 500px;
+  max-width: 500px;
   height: 600px;
+  animation: toggle-themer 1.5s ease-out;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+}
+@media (max-width: 524px) {
+  .container-calc {
+    min-width: 375px;
+    padding: 0 10px;
+  }
 }
 .container-calc .header {
   width: 100%;
@@ -221,9 +234,6 @@ html, body {
   border-radius: 20px;
   cursor: pointer;
 }
-.container-calc .header .container-themer .switch-themer-container ul li:is(.active) {
-  animation: toggle-control 1s ease-in-out;
-}
 .container-calc .header .container-themer .switch-themer-container ul li::before {
   content: "";
   position: absolute;
@@ -244,19 +254,15 @@ html, body {
   right: 8px;
 }
 .container-calc .screen {
-  width: 500px;
+  width: 100%;
   height: 120px;
   display: flex;
   align-items: center;
-  overflow-y: scroll;
-  border-right: none;
+  justify-content: center;
+  overflow: hidden;
   letter-spacing: 2px;
   font-size: 1.6em;
-  text-align: justify;
   border-radius: 10px;
-}
-.container-calc .screen::-webkit-scrollbar {
-  opacity: 0;
 }
 .container-calc .keypad {
   width: 100%;
@@ -266,6 +272,11 @@ html, body {
   padding: 30px;
   border-radius: 10px;
   column-gap: 20px;
+}
+@media (max-width: 524px) {
+  .container-calc .keypad {
+    padding: 15px;
+  }
 }
 .container-calc .keypad-btns {
   display: flex;
@@ -282,9 +293,20 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
   border-radius: 10px;
   cursor: pointer;
   transition: 0.7s easy-in-out;
+}
+@media (max-width: 424px) {
+  .container-calc .keypad-btns li:nth-child(n) {
+    font-size: 22px;
+  }
+}
+@media (max-width: 424px) {
+  .container-calc .keypad-btns li:nth-child(n) {
+    height: 40px;
+  }
 }
 .container-calc .keypad-btns li:nth-child(n):is(.dell-btn):hover {
   border-width: 3px;
@@ -297,6 +319,7 @@ html, body {
   text-transform: uppercase;
   width: calc(50% - 10px);
   height: 60px;
+  user-select: none;
   border-radius: 10px;
   font-size: 32px;
   font-family: "League Spartan", sans-serif;
@@ -305,6 +328,18 @@ html, body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+@media (max-width: 424px) {
+  .container-calc .keypad .reset-btn,
+  .container-calc .keypad .result-btn {
+    font-size: 22px;
+  }
+}
+@media (max-width: 424px) {
+  .container-calc .keypad .reset-btn,
+  .container-calc .keypad .result-btn {
+    height: 50px;
+  }
 }
 .container-calc .keypad .reset-btn:hover {
   border-width: 3px;

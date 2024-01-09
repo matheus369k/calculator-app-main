@@ -1,3 +1,4 @@
+// criando funções, arrays e variaveis....
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -42,11 +43,8 @@ var calcule = {
 };
 var numberCalc = '';
 var barToggleThemer = document.querySelectorAll('.btn');
-function indexOfItem(indexOf) {
-    return calcule.calcAll.indexOf(indexOf);
-}
-function includesItems(include) {
-    return calcule.calcAll.includes(include);
+function includesItems(array, include) {
+    return array.includes(include);
 }
 var Numbers = /** @class */ (function () {
     function Numbers(setNumber1, setNumber2) {
@@ -89,31 +87,35 @@ var Numbers = /** @class */ (function () {
     return Numbers;
 }());
 ;
+// detectando o click...
 barToggleThemer.forEach(function (btn) {
     btn.addEventListener('click', function (e) {
-        console.log('foreach-btn()');
+        // console.log('foreach-btn()')
         e.stopPropagation();
         if (btn.textContent === null)
             return;
         mountCalc(btn.textContent);
     });
 });
+// separando oque faz parte do calculo e oque não....
 function mountCalc(item) {
-    console.log('mountCalc()');
+    // console.log('mountCalc()')
     if ((item != 'del' &&
         item != 'reset' &&
-        item != '.' &&
         ((item != '-' && calcule.caclUmount.length == 0) || (calcule.caclUmount.length != 0))) && (isNaN(parseInt(item)) && (isNaN(Number(calcule.caclUmount[calcule.caclUmount.length - 1]))
         ||
             calcule.caclUmount.length == 0))) {
         return;
     }
+    if (includesItems(calcule.caclUmount, 'e') && item != 'reset')
+        return;
     calcule.caclUmount.push(item);
     AddRemoveScreenElement(calcule.caclUmount, false);
 }
+// fanzendo os calculos por order dos operadores e aparição...
 function Calc() {
+    // console.log('Calc()')
     var _this = this;
-    console.log('Calc()');
     calcule.caclUmount = [];
     if (calcule.calcAll.length <= 1) {
         for (var index = 0; index < calcule.calcAll[0].length; index++) {
@@ -126,7 +128,6 @@ function Calc() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    console.log(index);
                     if (!(item === 'x')) return [3 /*break*/, 2];
                     return [4 /*yield*/, compostCalcSide(index)];
                 case 1:
@@ -139,7 +140,7 @@ function Calc() {
                     _a.sent();
                     _a.label = 4;
                 case 4:
-                    if (!(!includesItems('x') && !includesItems('/'))) return [3 /*break*/, 8];
+                    if (!(!includesItems(calcule.calcAll, 'x') && !includesItems(calcule.calcAll, '/'))) return [3 /*break*/, 8];
                     if (!(item === '+')) return [3 /*break*/, 6];
                     return [4 /*yield*/, compostCalcSide(index)];
                 case 5:
@@ -156,8 +157,9 @@ function Calc() {
         });
     }); });
 }
+// Organizando os dados obtidos em uma nova Array para calcular o valor...
 (_a = document.querySelector('#result')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function (e) {
-    console.log('result-addeventlistener()');
+    // console.log('result-addeventlistener()')
     e.stopPropagation();
     calcule.caclUmount.push('=');
     for (var index = 0; index < calcule.caclUmount.length; index++) {
@@ -174,23 +176,24 @@ function Calc() {
             numberCalc = '';
         }
     }
-    if (calcule.caclUmount.includes('='))
+    if (includesItems(calcule.caclUmount, '='))
         calcule.caclUmount.pop();
-    if (calcule.calcAll.includes('='))
+    if (includesItems(calcule.calcAll, '='))
         calcule.calcAll.pop();
     if (Number(calcule.caclUmount[calcule.caclUmount.length - 1]))
         Calc();
 });
+// calculando
 function compostCalcSide(index) {
     return __awaiter(this, void 0, void 0, function () {
         var number1, number2, numbers, numberremove;
         return __generator(this, function (_a) {
-            console.log('compostCalcSide()');
+            // console.log('compostCalcSide()')
             calcule.result = 0;
             number1 = Number(calcule.calcAll[index - 1]);
             number2 = Number(calcule.calcAll[index + 1]);
             numbers = new Numbers(number1, number2);
-            console.log(calcule.calcAll);
+            // console.log(calcule.calcAll)
             switch (calcule.calcAll[index]) {
                 case '/':
                     calcule.result = numbers.divi;
@@ -213,8 +216,9 @@ function compostCalcSide(index) {
         });
     });
 }
+// Adicionar a tela os valores digitados e resultados
 function AddRemoveScreenElement(textElement, confimation) {
-    console.log('AddRemoveScreenElement()');
+    // console.log('AddRemoveScreenElement()')
     var screenContainer = document.getElementById('screen');
     if (screenContainer === null)
         return;
@@ -225,9 +229,9 @@ function AddRemoveScreenElement(textElement, confimation) {
     for (var index in textElement) {
         if (textElement[index] == '=')
             continue;
-        if (textElement.includes('del'))
+        if (includesItems(textElement, 'del'))
             calcule.caclUmount.splice(textElement.length - 2, textElement.length);
-        if (textElement.includes('reset')) {
+        if (includesItems(textElement, 'reset')) {
             calcule.caclUmount = [];
             break;
         }
@@ -238,11 +242,11 @@ function AddRemoveScreenElement(textElement, confimation) {
             breakLineMet = '';
             if (parseInt(index) == 14) {
                 screenContainer.style.fontSize = '1.2em';
-                breakLineCont = 19;
+                breakLineCont = 18;
             }
             else {
                 breakLineMet = '\n';
-                breakLineCont += 20;
+                breakLineCont += 19;
             }
             screenContainer.innerText += "".concat(textElement[index]).concat(breakLineMet);
         }
@@ -250,14 +254,18 @@ function AddRemoveScreenElement(textElement, confimation) {
             screenContainer.innerText += "".concat(textElement[index]);
         }
     }
+    if (textElement.length < 15) {
+        screenContainer.style.fontSize = '1.6em';
+        breakLineCont = 14;
+    }
     if (calcule.caclUmount.length == 0)
         screenContainer.innerText = '';
 }
 // switch themer
 document.querySelectorAll('.switchThemerbtn').forEach(function (btn, index) {
     btn.addEventListener('click', function () {
+        // console.log(document.body.className)
         var _a, _b;
-        console.log(document.body.className);
         document.body.classList.replace("".concat(document.body.className), "themer-".concat(index + 1, "-active"));
         (_a = document.querySelector('.active')) === null || _a === void 0 ? void 0 : _a.classList.remove('active');
         (_b = document.querySelector(".themer-".concat(index + 1))) === null || _b === void 0 ? void 0 : _b.classList.add('active');

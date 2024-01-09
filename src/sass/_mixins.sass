@@ -4,8 +4,19 @@
     font-size: variables.$font-size
     font-family: variables.$font-family
     font-weight: variables.$font-weight
+    @include responsive-400()
+        font-size: 22px
 
 @mixin flex-center()
     display: flex
     align-items: center
     justify-content: center
+
+@mixin responsive()
+    @media (max-width: 524px)
+        @content
+
+@mixin responsive-400()
+    @media (max-width: 424px)
+        @content
+    
