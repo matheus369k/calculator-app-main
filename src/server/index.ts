@@ -169,7 +169,11 @@ document.querySelector('#result')?.addEventListener('click', (e) => {
         if (
             parseInt(calcule.caclUmount[index]) ||
             parseInt(calcule.caclUmount[index]) == 0 ||
-            calcule.caclUmount[index] == '.' ||
+            (calcule.caclUmount[index] == '.' && 
+            calcule.caclUmount[index-1] != '.' &&
+            calcule.caclUmount[index-2] != '.' &&
+            calcule.caclUmount[index-3] != '.' &&
+            ) ||
             (
                 calcule.caclUmount[index] == '-' && index == 0
             )
