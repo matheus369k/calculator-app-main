@@ -132,7 +132,6 @@ function mountCalc(item: string) {
 }
 
 // fanzendo os calculos por order dos operadores e aparição...
-
 function OrdenOfTheCalc() {
     // console.log('Calc()');
 
@@ -226,7 +225,6 @@ document.querySelector('#result')?.addEventListener('click', (e) => {
 
 
 // calculando
-
 async function calcNumbers(index: number) {
     // console.log('compostCalcSide()');
 
